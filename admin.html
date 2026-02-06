@@ -21,20 +21,14 @@
                 <span class="text-2xl font-bold text-indigo-400 tracking-tighter">NEOTEL <span class="text-xs text-slate-500">ADMIN</span></span>
             </div>
             <nav class="flex-1 px-4 space-y-2 mt-4">
-                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition text-indigo-400 bg-indigo-500/10">
+                <a href="#" onclick="showSection('dashboard')" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition text-indigo-400 bg-indigo-500/10" id="nav-dashboard">
                     <i class="fas fa-chart-line"></i> <span>대시보드</span>
                 </a>
-                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition">
-                    <i class="fas fa-calendar-alt"></i> <span>예약 현황</span>
+                <a href="#" onclick="showSection('rooms')" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition" id="nav-rooms">
+                    <i class="fas fa-bed"></i> <span>객실/일정 관리</span>
                 </a>
-                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition">
-                    <i class="fas fa-bed"></i> <span>객실 관리</span>
-                </a>
-                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition">
-                    <i class="fas fa-history"></i> <span>히스토리</span>
-                </a>
-                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition">
-                    <i class="fas fa-cog"></i> <span>설정</span>
+                <a href="#" onclick="showSection('history')" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition" id="nav-history">
+                    <i class="fas fa-history"></i> <span>전체 히스토리</span>
                 </a>
             </nav>
             <div class="p-6 border-t border-slate-700">
@@ -50,121 +44,204 @@
 
         <!-- Main Content -->
         <main class="flex-1 overflow-y-auto p-8">
-            <header class="flex justify-between items-center mb-10">
-                <h1 class="text-3xl font-bold">통합 관리 대시보드</h1>
-                <div class="flex gap-4">
-                    <button class="bg-slate-800 p-2 rounded-lg border border-slate-700"><i class="fas fa-bell"></i></button>
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-bold transition">오늘의 현황</button>
-                </div>
-            </header>
+            <div id="section-dashboard" class="admin-section">
+                <header class="flex justify-between items-center mb-10">
+                    <h1 class="text-3xl font-bold">통합 관리 대시보드</h1>
+                    <div class="flex gap-4">
+                        <button class="bg-slate-800 p-2 rounded-lg border border-slate-700"><i class="fas fa-bell"></i></button>
+                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-bold transition">오늘의 현황</button>
+                    </div>
+                </header>
 
-            <!-- Stats -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                    <p class="text-slate-400 text-sm mb-2">오늘의 예약</p>
-                    <p class="text-3xl font-bold">12 <span class="text-xs text-green-500 font-normal">+20%</span></p>
+                <!-- Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <p class="text-slate-400 text-sm mb-2">오늘의 예약</p>
+                        <p class="text-3xl font-bold">12 <span class="text-xs text-green-500 font-normal">+20%</span></p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <p class="text-slate-400 text-sm mb-2">체크인 대기</p>
+                        <p class="text-3xl font-bold text-amber-400">4</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <p class="text-slate-400 text-sm mb-2">총 수익 (금일)</p>
+                        <p class="text-3xl font-bold text-indigo-400">₩ 850,000</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <p class="text-slate-400 text-sm mb-2">운영 객실</p>
+                        <p class="text-3xl font-bold">34 <span class="text-xs text-slate-500 font-normal">/ 37</span></p>
+                    </div>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                    <p class="text-slate-400 text-sm mb-2">체크인 대기</p>
-                    <p class="text-3xl font-bold text-amber-400">4</p>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                    <p class="text-slate-400 text-sm mb-2">총 수익 (금일)</p>
-                    <p class="text-3xl font-bold text-indigo-400">₩ 850,000</p>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                    <p class="text-slate-400 text-sm mb-2">운영 객실</p>
-                    <p class="text-3xl font-bold">34 <span class="text-xs text-slate-500 font-normal">/ 37</span></p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Room List & Memo Edit -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-slate-800 rounded-3xl border border-slate-700 overflow-hidden">
+                            <div class="p-6 border-b border-slate-700 flex justify-between items-center">
+                                <h2 class="text-xl font-bold">최근 예약 현황</h2>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left">
+                                    <thead class="bg-slate-700/50 text-slate-400 text-sm">
+                                        <tr>
+                                            <th class="px-6 py-4">객실</th>
+                                            <th class="px-6 py-4">예약자</th>
+                                            <th class="px-6 py-4">상태</th>
+                                            <th class="px-6 py-4">관리 메모</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-700">
+                                        <tr>
+                                            <td class="px-6 py-4 font-bold">101호</td>
+                                            <td class="px-6 py-4">홍길동</td>
+                                            <td class="px-6 py-4"><span class="bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-xs">숙박 중</span></td>
+                                            <td class="px-6 py-4">
+                                                <input type="text" value="비품 추가 요청하심" class="bg-transparent border-b border-transparent focus:border-indigo-500 focus:outline-none text-sm w-full" onchange="addHistory('101호 메모 수정: ' + this.value)">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mini History Viewer (Keep on dashboard) -->
+                    <div class="bg-slate-800 rounded-3xl border border-slate-700 flex flex-col overflow-hidden h-[400px]">
+                        <div class="p-6 border-b border-slate-700 bg-slate-800/50">
+                            <h2 class="text-xl font-bold flex items-center gap-2">
+                                <i class="fas fa-history text-indigo-400"></i> 최근 히스토리
+                            </h2>
+                        </div>
+                        <div class="p-6 overflow-y-auto flex-1 relative border-l border-slate-700 ml-8 my-4 history-container">
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Room List & Memo Edit -->
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="bg-slate-800 rounded-3xl border border-slate-700 overflow-hidden">
-                        <div class="p-6 border-b border-slate-700 flex justify-between items-center">
-                            <h2 class="text-xl font-bold">최근 예약 현황</h2>
-                            <button class="text-sm text-indigo-400">전체 보기</button>
+            <!-- Rooms & Calendar Section -->
+            <div id="section-rooms" class="admin-section hidden">
+                <header class="flex justify-between items-center mb-10">
+                    <h1 class="text-3xl font-bold">객실 및 일정 관리</h1>
+                    <div class="flex gap-2 bg-slate-800 p-1 rounded-xl border border-slate-700">
+                        <button onclick="changeCalendarView('week')" class="px-4 py-2 rounded-lg text-sm font-bold bg-indigo-600">주간</button>
+                        <button onclick="changeCalendarView('month')" class="px-4 py-2 rounded-lg text-sm font-bold hover:bg-slate-700">월간</button>
+                    </div>
+                </header>
+
+                <div class="bg-slate-800 rounded-3xl border border-slate-700 overflow-hidden">
+                    <div class="p-6 border-b border-slate-700 flex justify-between items-center bg-slate-700/20">
+                        <div class="flex items-center gap-4">
+                            <button class="text-slate-400 hover:text-white"><i class="fas fa-chevron-left"></i></button>
+                            <h3 class="text-lg font-bold" id="calendar-title">2026년 2월 2주차</h3>
+                            <button class="text-slate-400 hover:text-white"><i class="fas fa-chevron-right"></i></button>
                         </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left">
-                                <thead class="bg-slate-700/50 text-slate-400 text-sm">
-                                    <tr>
-                                        <th class="px-6 py-4">객실</th>
-                                        <th class="px-6 py-4">예약자</th>
-                                        <th class="px-6 py-4">상태</th>
-                                        <th class="px-6 py-4">관리 메모</th>
-                                        <th class="px-6 py-4">작업</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-slate-700">
-                                    <tr>
-                                        <td class="px-6 py-4 font-bold">101호</td>
-                                        <td class="px-6 py-4">홍길동</td>
-                                        <td class="px-6 py-4"><span class="bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-xs">숙박 중</span></td>
-                                        <td class="px-6 py-4">
-                                            <input type="text" value="비품 추가 요청하심" class="bg-transparent border-b border-transparent focus:border-indigo-500 focus:outline-none text-sm w-full" onchange="addHistory('101호 메모 수정: ' + this.value)">
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <button class="text-slate-500 hover:text-white transition"><i class="fas fa-edit"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 font-bold">205호</td>
-                                        <td class="px-6 py-4">김영희</td>
-                                        <td class="px-6 py-4"><span class="bg-amber-500/10 text-amber-500 px-3 py-1 rounded-full text-xs">체크인 예정</span></td>
-                                        <td class="px-6 py-4">
-                                            <input type="text" value="얼리 체크인 희망" class="bg-transparent border-b border-transparent focus:border-indigo-500 focus:outline-none text-sm w-full" onchange="addHistory('205호 메모 수정: ' + this.value)">
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <button class="text-slate-500 hover:text-white transition"><i class="fas fa-edit"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="flex gap-2">
+                            <span class="flex items-center gap-1 text-xs text-slate-400"><span class="w-3 h-3 bg-indigo-500 rounded-sm"></span> 예약완료</span>
+                            <span class="flex items-center gap-1 text-xs text-slate-400"><span class="w-3 h-3 bg-slate-600 rounded-sm"></span> 공실</span>
                         </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-center border-collapse">
+                            <thead>
+                                <tr class="bg-slate-900/50 text-slate-500 text-xs">
+                                    <th class="px-4 py-3 border border-slate-700 w-24">객실 / 날짜</th>
+                                    <th class="px-4 py-3 border border-slate-700">02.06 (금)</th>
+                                    <th class="px-4 py-3 border border-slate-700">02.07 (토)</th>
+                                    <th class="px-4 py-3 border border-slate-700">02.08 (일)</th>
+                                    <th class="px-4 py-3 border border-slate-700">02.09 (월)</th>
+                                    <th class="px-4 py-3 border border-slate-700">02.10 (화)</th>
+                                    <th class="px-4 py-3 border border-slate-700">02.11 (수)</th>
+                                    <th class="px-4 py-3 border border-slate-700">02.12 (목)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <!-- Generated Rows -->
+                                <tr>
+                                    <td class="px-4 py-4 border border-slate-700 font-bold bg-slate-900/30">101호</td>
+                                    <td class="px-2 py-4 border border-slate-700"><div class="bg-indigo-500/80 p-2 rounded text-xs">홍길동</div></td>
+                                    <td class="px-2 py-4 border border-slate-700"><div class="bg-indigo-500/80 p-2 rounded text-xs">홍길동</div></td>
+                                    <td class="px-2 py-4 border border-slate-700"></td>
+                                    <td class="px-2 py-4 border border-slate-700"><div class="bg-indigo-500/40 p-2 rounded text-xs text-slate-300">예정</div></td>
+                                    <td class="px-2 py-4 border border-slate-700"></td>
+                                    <td class="px-2 py-4 border border-slate-700"></td>
+                                    <td class="px-2 py-4 border border-slate-700"></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-4 border border-slate-700 font-bold bg-slate-900/30">102호</td>
+                                    <td class="px-2 py-4 border border-slate-700"></td>
+                                    <td class="px-2 py-4 border border-slate-700"><div class="bg-indigo-500/80 p-2 rounded text-xs">이인희</div></td>
+                                    <td class="px-2 py-4 border border-slate-700"><div class="bg-indigo-500/80 p-2 rounded text-xs">이인희</div></td>
+                                    <td class="px-2 py-4 border border-slate-700"></td>
+                                    <td class="px-2 py-4 border border-slate-700"></td>
+                                    <td class="px-2 py-4 border border-slate-700"></td>
+                                    <td class="px-2 py-4 border border-slate-700"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div>
 
-                <!-- History Viewer -->
-                <div class="bg-slate-800 rounded-3xl border border-slate-700 flex flex-col overflow-hidden h-[600px]">
-                    <div class="p-6 border-b border-slate-700 bg-slate-800/50">
-                        <h2 class="text-xl font-bold flex items-center gap-2">
-                            <i class="fas fa-history text-indigo-400"></i> 작업 히스토리
-                        </h2>
-                    </div>
-                    <div class="p-6 overflow-y-auto flex-1 relative border-l border-slate-700 ml-8 my-4" id="historyContainer">
-                        <!-- History Items will be injected here -->
-                        <div class="relative mb-6 history-item pl-4">
-                            <p class="text-xs text-slate-500 mb-1">방금 전</p>
-                            <p class="text-sm">관리자 페이지가 생성되었습니다.</p>
-                        </div>
-                        <div class="relative mb-6 history-item pl-4 opacity-70">
-                            <p class="text-xs text-slate-500 mb-1">5분 전</p>
-                            <p class="text-sm">시스템 초기 배포 완료</p>
-                        </div>
-                    </div>
+            <!-- Full History Section -->
+            <div id="section-history" class="admin-section hidden">
+                <h1 class="text-3xl font-bold mb-10">전체 히스토리 로그</h1>
+                <div class="bg-slate-800 rounded-3xl border border-slate-700 p-8 history-container">
+                    <!-- Cloned from Dashboard -->
                 </div>
             </div>
         </main>
     </div>
 
     <script>
-        function addHistory(message) {
-            const container = document.getElementById('historyContainer');
-            const now = new Date().toLocaleTimeString();
-            const newItem = document.createElement('div');
-            newItem.className = 'relative mb-6 history-item pl-4 animate-pulse';
-            newItem.innerHTML = `
-                <p class="text-xs text-indigo-400 mb-1 font-bold">${now} (실시간 기록)</p>
-                <p class="text-sm text-white font-semibold">${message}</p>
-            `;
-            container.insertBefore(newItem, container.firstChild);
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.admin-section').forEach(section => section.classList.add('hidden'));
+            // Show target section
+            document.getElementById('section-' + sectionId).classList.remove('hidden');
             
-            setTimeout(() => {
-                newItem.classList.remove('animate-pulse');
-            }, 1000);
+            // Update Nav UI
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('text-indigo-400', 'bg-indigo-500/10');
+            });
+            document.getElementById('nav-' + sectionId).classList.add('text-indigo-400', 'bg-indigo-500/10');
         }
+
+        function addHistory(message) {
+            const containers = document.querySelectorAll('.history-container');
+            const now = new Date().toLocaleTimeString();
+            
+            containers.forEach(container => {
+                const newItem = document.createElement('div');
+                newItem.className = 'relative mb-6 history-item pl-4 animate-pulse';
+                newItem.innerHTML = `
+                    <p class="text-xs text-indigo-400 mb-1 font-bold">${now} (실시간 기록)</p>
+                    <p class="text-sm text-white font-semibold">${message}</p>
+                `;
+                container.insertBefore(newItem, container.firstChild);
+                
+                setTimeout(() => {
+                    newItem.classList.remove('animate-pulse');
+                }, 1000);
+            });
+        }
+
+        function changeCalendarView(view) {
+            const title = document.getElementById('calendar-title');
+            if (view === 'month') {
+                title.innerText = '2026년 2월';
+                addHistory('일정 보기 모드 변경: 월간');
+            } else {
+                title.innerText = '2026년 2월 2주차';
+                addHistory('일정 보기 모드 변경: 주간');
+            }
+            
+            // Toggle Button Styles
+            event.target.parentElement.querySelectorAll('button').forEach(btn => btn.classList.remove('bg-indigo-600'));
+            event.target.classList.add('bg-indigo-600');
+        }
+
+        // Initialize with dummy logs
+        addHistory('관리자 시스템이 주인님을 맞이할 준비를 마쳤습니다.');
     </script>
 </body>
 </html>
