@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객실 안내 - 네오텔</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+        body { font-family: 'Noto Sans KR', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation (Same as index) -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-indigo-600 tracking-tighter">NEOTEL</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 font-medium">홈</a>
+                        <a href="rooms.html" class="text-indigo-600 px-3 py-2 font-medium">객실안내</a>
+                        <a href="booking.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 font-medium">실시간예약</a>
+                        <a href="location.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 font-medium">오시는길</a>
+                        <a href="board.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 font-medium">커뮤니티</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-bold text-center mb-4">ROOMS</h1>
+            <p class="text-center text-gray-500 mb-16 italic">편안하고 아늑한 공간, 네오텔의 다양한 객실을 소개합니다.</p>
+
+            <div class="space-y-24">
+                <!-- Standard -->
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="flex-1 rounded-3xl overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Standard Room" class="w-full h-[400px] object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <span class="text-indigo-600 font-bold uppercase tracking-widest text-sm">Comfort & Simple</span>
+                        <h2 class="text-3xl font-bold mt-2 mb-6">Standard Room</h2>
+                        <p class="text-gray-600 mb-8 leading-relaxed">깔끔한 화이트 톤의 인테리어와 실용적인 배치가 돋보이는 객실입니다. 비즈니스 고객과 연인들을 위한 최적의 휴식 공간입니다.</p>
+                        <div class="grid grid-cols-2 gap-4 mb-8 text-sm text-gray-500">
+                            <div class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> 대형 스마트 TV (넷플릭스)</div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> 최고급 오리털 침구</div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> 고속 무선 와이파이</div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> 전용 어메니티</div>
+                        </div>
+                        <div class="flex items-end justify-between border-t border-gray-100 pt-6">
+                            <div>
+                                <p class="text-sm text-gray-400 line-through">₩60,000</p>
+                                <p class="text-2xl font-bold text-gray-900">₩50,000 <span class="text-sm font-normal text-gray-500">/ 4시간 대실</span></p>
+                            </div>
+                            <a href="booking.html" class="bg-gray-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-indigo-600 transition">예약하기</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deluxe -->
+                <div class="flex flex-col md:flex-row-reverse gap-12 items-center">
+                    <div class="flex-1 rounded-3xl overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Deluxe Room" class="w-full h-[400px] object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <span class="text-indigo-600 font-bold uppercase tracking-widest text-sm">Wide & Modern</span>
+                        <h2 class="text-3xl font-bold mt-2 mb-6">Deluxe Room</h2>
+                        <p class="text-gray-600 mb-8 leading-relaxed">더 넓은 여유와 모던한 감성이 어우러진 공간입니다. 대형 욕조와 스타일러가 구비되어 있어 더욱 쾌적한 스테이를 제공합니다.</p>
+                        <div class="grid grid-cols-2 gap-4 mb-8 text-sm text-gray-500">
+                            <div class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> LG 트롬 스타일러</div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> 대형 원형 욕조</div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> 커플 PC (RTX 4060)</div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> 공기청정기 완비</div>
+                        </div>
+                        <div class="flex items-end justify-between border-t border-gray-100 pt-6">
+                            <div>
+                                <p class="text-sm text-gray-400 line-through">₩120,000</p>
+                                <p class="text-2xl font-bold text-gray-900">₩100,000 <span class="text-sm font-normal text-gray-500">/ 숙박(평일)</span></p>
+                            </div>
+                            <a href="booking.html" class="bg-gray-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-indigo-600 transition">예약하기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-white text-2xl font-bold mb-4">NEOTEL</h2>
+            <p class="text-sm">&copy; 2026 NEOTEL. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
